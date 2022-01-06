@@ -1,0 +1,14 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.nf-head {
+  font-family: 'Roboto';
+  font-size: 24px;
+}
+.nf-text {
+  font-family: 'Roboto';
+  font-size: 18px;
+}
