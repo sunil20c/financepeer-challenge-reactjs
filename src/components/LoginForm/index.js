@@ -31,21 +31,29 @@ class LoginForm extends Component {
     this.setState({showSubmitError: true, errorMsg})
   }
 
-  onSubmitDetails = () => {
+  onSubmitDetails = async event => {
+    event.preventDefault()
     const {username, password} = this.state
 
     const userDetails = {username, password}
-    const url = 'https://financepeer-challenge.herokuapp.com/login'
+
+    const loginUrl = 'https://financepeer-challenge.herokuapp.com/login'
 
     const options = {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify(userDetails),
     }
 
-    const response = fetch(url, options)
-    const data = response.json()
+    const response = await fetch(loginUrl, options)
+    const data = await response.json()
+
     if (response.ok === true) {
-      this.onSubmitSuccess(data.jwtToken)
+      this.onSubmitSuccess(data.jwt_token)
+      console.log(data.jwtToken)
     } else {
       this.onSubmitFailure(data.error_msg)
     }
@@ -54,6 +62,7 @@ class LoginForm extends Component {
   render() {
     const {username, password, showSubmitError, errorMsg} = this.state
     const jwtToken = Cookies.get('jwt_token')
+    console.log(jwtToken)
     if (jwtToken !== undefined) {
       return <Redirect to="/" />
     }

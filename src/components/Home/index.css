@@ -24,3 +24,14 @@
   font-family: 'Roboto';
   font-size: 14px;
 }
+
+.list-items-container {
+  list-style: none;
+  border: 1px solid;
+  width: 80vh;
+}
+
+.user-item-container {
+  margin-bottom: 5px;
+  padding: 4px;
+}
